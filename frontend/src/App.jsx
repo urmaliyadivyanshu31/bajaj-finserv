@@ -23,7 +23,7 @@ const App = () => {
     setIsValid(true);
 
     try {
-      const res = await fetch("https://mybajaj-itz5rd9sd-oxdivs-projects.vercel.app/bfhl", {
+      const res = await fetch("https://bajaj-finserv-kc9u-rk7nsszup-oxdivs-projects.vercel.app/bfhl", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ data: JSON.parse(jsonInput) }),

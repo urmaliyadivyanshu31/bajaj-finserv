@@ -11,5 +11,6 @@
     "dotenv": "^16.4.5",
     "express": "^4.18.2",
     "multer": "^1.4.4"
-  }
+  },
+  "proxy": "https://mybajaj-itz5rd9sd-oxdivs-projects.vercel.app"
 }

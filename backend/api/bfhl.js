@@ -2,12 +2,18 @@ const multer = require("multer");
 const express = require("express");
 const { validateJSON } = require("../utils/jsonValidator");
 const { validateFile } = require("../utils/fileHandler");
+const cors = require('cors');
 
 // Multer setup
 const upload = multer();
 const app = express();
 
 app.use(express.json());
+
+// Enable CORS for your specific origin
+app.use(cors({
+    origin: 'https://bajaj-finserv-mocha-zeta.vercel.app'
+}));
 
 // POST route
 app.post("/", upload.single("file"), (req, res) => {
