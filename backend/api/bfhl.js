@@ -1,50 +1,43 @@
-const multer = require("multer");
-const express = require("express");
-const cors = require("cors");
-const { validateJSON } = require("../utils/jsonValidator");
-const { validateFile } = require("../utils/fileHandler");
+const express = require('express');
+const cors = require('cors');
+const multer = require('multer');
+const { validateJSON } = require('../utils/jsonValidator');
+const { validateFile } = require('../utils/fileHandler');
 
-// Multer setup to handle file uploads
-const upload = multer();
+// Set up CORS (if needed)
 const app = express();
+app.use(cors({
+  origin: 'https://bajaj-finserv-mocha-zeta.vercel.app', // Replace with your frontend origin
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Adjust as needed
+  allowedHeaders: ['Content-Type', 'Authorization'] // If you need custom headers
+}));
 
+// Multer setup
+const upload = multer();
+
+// Middleware to parse JSON body
 app.use(express.json());
 
-// Enable CORS for your specific origin
-app.use(
-  cors({
-    origin: "https://bajaj-finserv-mocha-zeta.vercel.app", // Replace with your frontend URL
-    methods: ["GET", "POST", "OPTIONS"], // Allow specific methods
-    allowedHeaders: ["Content-Type", "Authorization"], // Allow specific headers
-  })
-);
-
-// POST route to handle data and file
-app.post("/", upload.single("file"), (req, res) => {
+// POST route
+app.post('/', upload.single('file'), (req, res) => {
   try {
     const { data, email, roll_number } = req.body;
     const file = req.file;
 
-    // Check for required fields
     if (!data || !email || !roll_number) {
-      return res.status(400).json({ is_success: false, message: "Missing fields" });
+      return res.status(400).json({ is_success: false, message: 'Missing fields' });
     }
 
-    // Validate the JSON data
-    const { isValid, numbers, alphabets, isPrimeFound, highestLowercase } =
-      validateJSON(data);
+    // Validate JSON data
+    const { isValid, numbers, alphabets, isPrimeFound, highestLowercase } = validateJSON(data);
 
-    if (!isValid) {
-      return res.status(400).json({ is_success: false, message: "Invalid JSON format" });
-    }
-
-    // Validate file (e.g., check file type or size)
+    // Validate file
     const fileInfo = validateFile(file);
 
-    // Respond with the processed data
+    // Respond with processed data
     res.status(200).json({
       is_success: true,
-      user_id: `${email.split("@")[0]}_${roll_number}`,
+      user_id: `${email.split('@')[0]}_${roll_number}`,
       email,
       roll_number,
       numbers,
@@ -57,6 +50,3 @@ app.post("/", upload.single("file"), (req, res) => {
     res.status(500).json({ is_success: false, error: error.message });
   }
 });
-
-// Export the API
-module.exports = app;
