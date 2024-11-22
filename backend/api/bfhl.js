@@ -2,7 +2,6 @@ const multer = require("multer");
 const express = require("express");
 const { validateJSON } = require("../utils/jsonValidator");
 const { validateFile } = require("../utils/fileHandler");
-const cors = require('cors');
 
 // Multer setup
 const upload = multer();
