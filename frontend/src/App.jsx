@@ -6,6 +6,7 @@ const App = () => {
   const [response, setResponse] = useState(null);
   const [dropdownOptions, setDropdownOptions] = useState([]);
 
+  // Function to validate JSON input
   const validateJSON = (input) => {
     try {
       JSON.parse(input);
@@ -15,6 +16,7 @@ const App = () => {
     }
   };
 
+  // Handle form submission
   const handleSubmit = async () => {
     if (!validateJSON(jsonInput)) {
       setIsValid(false);
@@ -23,6 +25,7 @@ const App = () => {
     setIsValid(true);
 
     try {
+      // Sending POST request to backend
       const res = await fetch("https://bajaj-finserv-kc9u-rk7nsszup-oxdivs-projects.vercel.app/bfhl", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -43,6 +46,7 @@ const App = () => {
     }
   };
 
+  // Render the response based on the selected options
   const renderResponse = () => {
     if (!response) return null;
 
@@ -85,6 +89,7 @@ const App = () => {
           borderRadius: "10px",
           boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
           width: "90%",
+          maxWidth: "600px",
         }}
       >
         <h1 style={{ marginBottom: "20px" }}>Your Roll Number</h1>

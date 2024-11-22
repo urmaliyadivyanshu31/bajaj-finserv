@@ -1,0 +1,12 @@
+{
+    "functions": {
+      "api/bfhl.js": {
+        "maxDuration": 10,
+        "memory": 1024,
+        "cors": {
+          "allowOrigins": ["https://bajaj-finserv-mocha-zeta.vercel.app"]
+        }
+      }
+    }
+  }
+  
