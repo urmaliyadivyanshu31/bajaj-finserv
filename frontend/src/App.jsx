@@ -10,8 +10,12 @@ const App = () => {
   const validateJSON = (jsonInput) => {
     try {
       const parsed = JSON.parse(jsonInput);
-      // Add additional validation logic if necessary
-      return true;
+      // Check if parsed object contains 'data'
+      if (parsed && Array.isArray(parsed.data)) {
+        return true;
+      } else {
+        return false;
+      }
     } catch (error) {
       return false;
     }
@@ -28,10 +32,9 @@ const App = () => {
       // Send POST request to backend
       const res = await fetch('https://bajaj-finserv-kc9u-rk7nsszup-oxdivs-projects.vercel.app/api/bfhl', {
         method: 'POST',
-        mode: 'no-cors',
         headers: {
-          'Content-Type': 'application/json'
-      },
+          'Content-Type': 'application/json',
+        },
         body: JSON.stringify({ data: ["A", "B", "C"] }),
       });
 
@@ -50,21 +53,20 @@ const App = () => {
   };
 
   const renderResponse = () => {
-    if (!response) return null;
+    if (!response) {
+      return <p>No response data available yet.</p>;
+    }
 
-    let filteredResponse = response;
+    let filteredResponse = { ...response };
 
-    if (dropdownOptions.includes('Alphabets')) {
+    if (dropdownOptions.includes('Alphabets') && response.alphabets) {
       filteredResponse = { ...filteredResponse, alphabets: response.alphabets };
     }
-    if (dropdownOptions.includes('Numbers')) {
+    if (dropdownOptions.includes('Numbers') && response.numbers) {
       filteredResponse = { ...filteredResponse, numbers: response.numbers };
     }
-    if (dropdownOptions.includes('Highest lowercase alphabet')) {
-      filteredResponse = {
-        ...filteredResponse,
-        highest_lowercase_alphabet: response.highest_lowercase_alphabet,
-      };
+    if (dropdownOptions.includes('Highest lowercase alphabet') && response.highest_lowercase_alphabet) {
+      filteredResponse = { ...filteredResponse, highest_lowercase_alphabet: response.highest_lowercase_alphabet };
     }
 
     return <pre style={{ color: '#333', marginTop: '20px' }}>{JSON.stringify(filteredResponse, null, 2)}</pre>;
