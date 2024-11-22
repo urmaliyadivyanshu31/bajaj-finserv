@@ -70,7 +70,7 @@ const App = () => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        height: "100vh",
+        minHeight: "100vh",
         background: "linear-gradient(to bottom right, #6a11cb, #2575fc)",
         color: "#fff",
         fontFamily: "Arial, sans-serif",
@@ -85,7 +85,6 @@ const App = () => {
           borderRadius: "10px",
           boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
           width: "90%",
-          maxWidth: "500px",
         }}
       >
         <h1 style={{ marginBottom: "20px" }}>Your Roll Number</h1>
