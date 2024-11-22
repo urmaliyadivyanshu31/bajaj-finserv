@@ -1,7 +1,3 @@
-Here's a short README for your project:
-
----
-
 # Project Name: JSON Validator and File Upload API
 
 ## Description
