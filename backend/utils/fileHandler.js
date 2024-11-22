@@ -1,13 +1,15 @@
+// A simple file validation (you can extend this to check file type or size)
 const validateFile = (file) => {
     if (!file) {
-      return { file_valid: false, file_mime_type: null, file_size_kb: null };
+      return { file_valid: false, message: "No file uploaded" };
     }
   
-    return {
-      file_valid: true,
-      file_mime_type: file.mimetype,
-      file_size_kb: (file.size / 1024).toFixed(2),
-    };
+    // Example: Check if the file type is an image
+    if (!file.mimetype.startsWith("image/")) {
+      return { file_valid: false, message: "Invalid file type. Only images are allowed." };
+    }
+  
+    return { file_valid: true, file_name: file.originalname };
   };
   
   module.exports = { validateFile };

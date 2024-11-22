@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 const App = () => {
   const [jsonInput, setJsonInput] = useState("");
+  const [file, setFile] = useState(null);
   const [isValid, setIsValid] = useState(true);
   const [response, setResponse] = useState(null);
   const [dropdownOptions, setDropdownOptions] = useState([]);
@@ -24,12 +25,16 @@ const App = () => {
     }
     setIsValid(true);
 
+    // Prepare the FormData object
+    const formData = new FormData();
+    formData.append("data", jsonInput); // Append the JSON data
+    formData.append("file", file); // Append the file
+
     try {
-      // Sending POST request to backend
-      const res = await fetch("https://bajaj-finserv-kc9u-rk7nsszup-oxdivs-projects.vercel.app/bfhl", {
+      // Sending POST request to backend with FormData
+      const res = await fetch("https://bajaj-finserv-kc9u-rk7nsszup-oxdivs-projects.vercel.app/api/bfhl", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ data: JSON.parse(jsonInput) }),
+        body: formData, // Sending FormData instead of JSON
       });
 
       if (!res.ok) {
@@ -98,6 +103,18 @@ const App = () => {
           value={jsonInput}
           onChange={(e) => setJsonInput(e.target.value)}
           placeholder='Enter JSON e.g. {"data": ["A", "C", "z"]}'
+          style={{
+            width: "100%",
+            padding: "10px",
+            marginBottom: "10px",
+            borderRadius: "5px",
+            border: "1px solid #ccc",
+            boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+          }}
+        />
+        <input
+          type="file"
+          onChange={(e) => setFile(e.target.files[0])}
           style={{
             width: "100%",
             padding: "10px",

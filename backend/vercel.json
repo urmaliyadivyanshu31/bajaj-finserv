@@ -1,12 +1,16 @@
 {
+    "version": 2,
     "functions": {
       "api/bfhl.js": {
-        "maxDuration": 10,
         "memory": 1024,
-        "cors": {
-          "allowOrigins": ["https://bajaj-finserv-mocha-zeta.vercel.app"]
-        }
+        "maxDuration": 10
       }
-    }
+    },
+    "builds": [
+      {
+        "src": "api/bfhl.js",
+        "use": "@vercel/node"
+      }
+    ]
   }
   
