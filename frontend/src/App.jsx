@@ -28,11 +28,11 @@ const App = () => {
       // Send POST request to backend
       const res = await fetch('https://bajaj-finserv-kc9u-rk7nsszup-oxdivs-projects.vercel.app/api/bfhl', {
         method: 'POST',
+        mode: 'no-cors',
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer YOUR_API_KEY' // Replace with your actual API key
-        },
-        body: JSON.stringify({ data: JSON.parse(jsonInput) }),
+          'Content-Type': 'application/json'
+      },
+        body: JSON.stringify({ data: ["A", "B", "C"] }),
       });
 
       if (!res.ok) {

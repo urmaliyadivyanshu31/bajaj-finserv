@@ -1,15 +1,12 @@
 {
-    "version": 2,
-    "functions": {
-      "api/bfhl.js": {
-        "memory": 1024,
-        "maxDuration": 10
-      }
-    },
-    "builds": [
+    "routes": [
       {
-        "src": "api/bfhl.js",
-        "use": "@vercel/node"
+        "src": "/api/bfhl",
+        "headers": {
+          "Access-Control-Allow-Origin": "https://bajaj-finserv-mocha-zeta.vercel.app",
+          "Access-Control-Allow-Methods": "GET,POST,PUT,DELETE",
+          "Access-Control-Allow-Headers": "Content-Type"
+        }
       }
     ]
   }
