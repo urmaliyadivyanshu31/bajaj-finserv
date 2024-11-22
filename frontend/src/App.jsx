@@ -6,6 +6,17 @@ const App = () => {
   const [response, setResponse] = useState(null);
   const [dropdownOptions, setDropdownOptions] = useState([]);
 
+  // Define the validateJSON function
+  const validateJSON = (jsonInput) => {
+    try {
+      const parsed = JSON.parse(jsonInput);
+      // Add additional validation logic if necessary
+      return true;
+    } catch (error) {
+      return false;
+    }
+  };
+
   const handleSubmit = async () => {
     if (!validateJSON(jsonInput)) {
       setIsValid(false);
