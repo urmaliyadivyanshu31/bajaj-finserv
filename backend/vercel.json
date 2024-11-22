@@ -1,12 +1,21 @@
 {
-    "routes": [
+    "headers": [
       {
-        "src": "/api/bfhl",
-        "headers": {
-          "Access-Control-Allow-Origin": "https://bajaj-finserv-mocha-zeta.vercel.app",
-          "Access-Control-Allow-Methods": "GET,POST,PUT,DELETE",
-          "Access-Control-Allow-Headers": "Content-Type"
-        }
+        "source": "/api/bfhl",
+        "headers": [
+          {
+            "key": "Access-Control-Allow-Origin",
+            "value": "https://bajaj-finserv-mocha-zeta.vercel.app"
+          },
+          {
+            "key": "Access-Control-Allow-Methods",
+            "value": "GET, POST, OPTIONS, PUT, DELETE"
+          },
+          {
+            "key": "Access-Control-Allow-Headers",
+            "value": "Content-Type, Authorization"
+          }
+        ]
       }
     ]
   }
